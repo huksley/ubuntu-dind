@@ -8,7 +8,7 @@ RUN apt-get update -qq && apt-get install -qqy \
     ca-certificates \
     curl \
     lxc \
-    iptables \
+    iptables && \
     apt-get upgrade -y
     
 # Install Docker from Docker Inc. repositories.
@@ -22,8 +22,9 @@ RUN apt-get update && apt-get install locales ca-certificates curl unzip netcat 
 	--header "Cookie: oraclelicense=accept-securebackup-cookie;" \
 	http://download.oracle.com/otn-pub/java/jdk/"${VERSION}"u"${UPDATE}"-b"${BUILD}"/"${SIG}"/jdk-"${VERSION}"u"${UPDATE}"-linux-x64.tar.gz \
 	| tar xz -C /tmp && \
-	mkdir -p /usr/lib/jvm && mv /tmp/jdk1.${VERSION}.0_${UPDATE} "${JAVA_HOME}" && \
-	apt-get autoclean && apt-get --purge -y autoremove && \
+	mkdir -p /usr/lib/jvm && mv /tmp/jdk1.${VERSION}.0_${UPDATE} "${JAVA_HOME}" 
+
+RUN apt-get autoclean && apt-get --purge -y autoremove && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN update-alternatives --install "/usr/bin/java" "java" "${JRE_HOME}/bin/java" 1 && \
