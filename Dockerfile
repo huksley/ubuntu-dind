@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-MAINTAINER Billy Ray Teves <billyteves@gmail.com>
+MAINTAINER Ruslan Gainutdinov <ruslanfg@gmail.com>
 
 # Let's start with some basic stuff.
 RUN apt-get update -qq && apt-get install -qqy \
