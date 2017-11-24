@@ -1,5 +1,4 @@
 FROM ubuntu:16.04
-
 MAINTAINER Ruslan Gainutdinov <ruslanfg@gmail.com>
 
 # Let's start with some basic stuff.
@@ -13,6 +12,16 @@ RUN apt-get update -qq && apt-get install -qqy \
     
 # Install Docker from Docker Inc. repositories.
 RUN curl -sSL https://get.docker.com/ | sh
+
+# JDK version info from 
+# http://www.oracle.com/technetwork/java/javase/downloads/index.html
+ENV DEBIAN_FRONTEND noninteractive
+ENV VERSION 8
+ENV UPDATE 151
+ENV BUILD 12
+ENV SIG e758a0de34e24606bca991d704f6dcbf
+ENV JAVA_HOME /usr/lib/jvm/java-${VERSION}-oracle
+ENV JRE_HOME ${JAVA_HOME}/jre
 
 RUN apt-get update && apt-get install locales ca-certificates curl unzip netcat wget git \
 	-y --no-install-recommends && \
@@ -32,7 +41,7 @@ RUN update-alternatives --install "/usr/bin/java" "java" "${JRE_HOME}/bin/java" 
 	update-alternatives --install "/usr/bin/javac" "javac" "${JAVA_HOME}/bin/javac" 1 && \
 	update-alternatives --set java "${JRE_HOME}/bin/java" && \
 	update-alternatives --set javaws "${JRE_HOME}/bin/javaws" && \
-update-alternatives --set javac "${JAVA_HOME}/bin/javac"
+    update-alternatives --set javac "${JAVA_HOME}/bin/javac"
 
 # Install the magic wrapper.
 ADD ./wrapdocker /usr/local/bin/wrapdocker
