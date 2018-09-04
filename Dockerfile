@@ -17,9 +17,9 @@ RUN curl -sSL https://get.docker.com/ | sh
 # http://www.oracle.com/technetwork/java/javase/downloads/index.html
 ENV DEBIAN_FRONTEND noninteractive
 ENV VERSION 8
-ENV UPDATE 151
-ENV BUILD 12
-ENV SIG e758a0de34e24606bca991d704f6dcbf
+ENV UPDATE 181
+ENV BUILD 13
+ENV SIG 96a7b8442fe848ef90c96a2fad6ed6d1
 ENV JAVA_HOME /usr/lib/jvm/java-${VERSION}-oracle
 ENV JRE_HOME ${JAVA_HOME}/jre
 
